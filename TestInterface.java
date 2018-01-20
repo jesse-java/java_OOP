@@ -29,11 +29,20 @@
 
 // ● Add the showPortfolio method that will print all the project elevator pitches, followed by the total cost.
 
+// public interface TestInterface {
+//     String getName();
+    
+// }
+
+interface TestInterface {
+    public String getName();
+}
 
 
-class Project {
+public class Project implements TestInterface{
     private String name;
     private String description;
+    private Double initialCost;
     
     public Project() {
     }
@@ -46,7 +55,7 @@ class Project {
     }
 
     public String elevatorPitch() {
-        return name + " : " + description;
+        return name + " ($" + initialCost + ") : " + description;
     }
 
     public String getName() {
@@ -61,7 +70,13 @@ class Project {
     public void setDescription(String description) {
         this.description = description;
     }
+    public Double getInitialCost() {
+        return initialCost;
+    }
+    public void setInitialCost(Double initialCost) {
+        this.initialCost = initialCost;
+    }
 
-
+    
 
 }
