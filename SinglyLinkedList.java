@@ -73,4 +73,48 @@ public class SinglyLinkedList {
             curr = curr.getNext();
         }
     }
+
+    public Node find(int value) {
+        Node curr = head;
+
+        while (curr != null) {
+            if(curr.getValue() == value) {
+                return curr;
+            }
+            curr = curr.getNext();
+        }
+
+        return null;
+    }
+
+    public void removeAt(int n) {
+        if(n <= -1) {n = 0;}
+        Node curr = head;
+        int count = 0;
+
+        //handle special cases where n is zero
+        if (n == 0) {
+            head = curr.getNext(); 
+        }
+        //handle special case where n is 1
+        else if (n == 1 && curr.getNext() != null) {
+            //for some reason this works but not curr.getNext().getNext() !!!!
+            curr.setNext(curr.getNext());
+        }
+
+        //handle normal cases where is n > 1
+        //set current node's next to next.next when count is one below n
+        while(curr.getNext() != null) {
+            // System.out.println(count);
+            if (count + 1 == n) {
+                // System.out.println("running inside if statement");
+                curr.setNext(curr.getNext().getNext());
+                break;
+            }
+            curr = curr.getNext();
+            count++;
+            
+        }
+
+    }
 }
