@@ -1,50 +1,53 @@
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
-// class Portfolio<Project> {
-class Portfolio<Project>{
-    // private ArrayList<Project> projects = new ArrayList<Project>();
-    private ArrayList<TestInterface> projects = new ArrayList<TestInterface>();
+// remember that a BigDecimal is immutable
 
-    public Portfolio() {   
+public class Portfolio{
+    protected ArrayList<Project> portfolio = new ArrayList<Project>();
+    
+    public Portfolio() {
     }
 
     public Portfolio(Project project) {
-        projects.add(project);
+        portfolio.add(project);
+    }
 
-        for (TestInterface t: projects) {
-            // System.out.println("Object Name: " + t.getName());
-            System.out.println(t);
+    public void addProject(Project p) {
+        portfolio.add(p);
+    }
+
+    public ArrayList<Project> getProjects() {
+        return portfolio;
+    }
+
+    public BigDecimal getPortfolioCost () {
+        BigDecimal totalCost = new BigDecimal(0.00);
+        for (Project p: portfolio) {
+            if (p.getInitialCost() != null) {
+                totalCost = totalCost.add(p.getInitialCost());
+            }
         }
-        
-        // int i = 0;
-        // for (Project currProject: projects) {
-        //     // System.out.println("inside loop" + currProject);
-        //     // System.out.println(currProject);
-        //     // System.out.println(currProject.getName());
-        //     String name = currProject;
-        //     System.out.println(name);
-        //     // System.
-        // }
 
-        // for (int i = 0; i < projects.size(); i++) {
-        //     System.out.println(((Project)projects.get(i)).getName());
-        // }
-    }
-
-    public void addProject(Project project) {
-        projects.add(project);
-    }
-
-    public ArrayList<TestInterface> getProjects() {
-        return projects;
-    }
-
-    public void getPortfolioCost () {
-
+        return totalCost;
     }
 
     public void showPortfolio() {
+        String totalstr = "";
+        
+        int count = 1;
+        for (Project p: portfolio) {
+            totalstr += "Project #" + count + "::";
+            totalstr += " Name: " + p.getName();
+            totalstr += " Description: " + p.getDescription() + " ";
+            count++;
+        }
 
+
+        BigDecimal totalCost = this.getPortfolioCost();
+
+
+        System.out.println(totalstr + " Total Cost of Portfolio: $" + totalCost);
     }
 
 }

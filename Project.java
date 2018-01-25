@@ -1,3 +1,5 @@
+import java.math.BigDecimal;
+
 // Tasks:
 
 // ● Create a Project class that has the fields of name and description.
@@ -29,33 +31,31 @@
 
 // ● Add the showPortfolio method that will print all the project elevator pitches, followed by the total cost.
 
-// public interface TestInterface {
-//     String getName();
-    
-// }
 
-interface TestInterface {
-    public String getName();
-}
-
-
-public class Project implements TestInterface{
-    private String name;
-    private String description;
-    private Double initialCost;
+public class Project{
+    protected String name;
+    protected String description;
+    protected BigDecimal initialCost;
     
     public Project() {
     }
-    public Project(String name) {
+    public Project(String name) {  
         this.name = name;
     }
     public Project(String name, String description) {
         this.name = name;
         this.description = description;
     }
+    public Project(String name, String description, double initialCost) {
+        this.name = name;
+        this.description = description;
+
+        this.initialCost = new BigDecimal(initialCost).setScale(2,BigDecimal.ROUND_HALF_EVEN);
+       
+    }
 
     public String elevatorPitch() {
-        return name + " ($" + initialCost + ") : " + description;
+        return "Project Name: " + name + " -  InitialCost: $" + initialCost + " : " + description;
     }
 
     public String getName() {
@@ -70,11 +70,14 @@ public class Project implements TestInterface{
     public void setDescription(String description) {
         this.description = description;
     }
-    public Double getInitialCost() {
+    public BigDecimal getInitialCost() {
         return initialCost;
     }
-    public void setInitialCost(Double initialCost) {
-        this.initialCost = initialCost;
+    public void setInitialCost(double initialCost) {
+
+        this.initialCost = new BigDecimal(initialCost);
+        this.initialCost = this.initialCost.setScale(2, BigDecimal.ROUND_HALF_EVEN);
+
     }
 
     
